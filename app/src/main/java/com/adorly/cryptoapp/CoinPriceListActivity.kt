@@ -1,7 +1,6 @@
 package com.adorly.cryptoapp
 
 import android.os.Bundle
-import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -19,17 +18,22 @@ class CoinPriceListActivity : AppCompatActivity() {
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
             override fun onCoinClick(coinPiceInfo: CoinPriceInfo) {
-                Log.d("ON_CLICK_TEST", coinPiceInfo.fromsymbol )
+                val intent = CoinDetailActivity.newIntent(
+                    this@CoinPriceListActivity,
+                    coinPiceInfo.fromsymbol
+                )
+                startActivity(intent)
             }
         }
         val rvCoinPriceList = findViewById<RecyclerView>(R.id.rvCoinPriceList)
         rvCoinPriceList.adapter = adapter
-        viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application))[CoinViewModel::class.java]
+        viewModel = ViewModelProvider(
+            this,
+            ViewModelProvider.AndroidViewModelFactory(application)
+        )[CoinViewModel::class.java]
         viewModel.priceList.observe(this, Observer {
             adapter.coinInfoList = it
         })
-//    viewModel.getDetailInfo("BTC").observe(this, Observer{ Log.d("TEST_OF_LOADING_DATA", "Success $it" )})
-
     }
 
 }
