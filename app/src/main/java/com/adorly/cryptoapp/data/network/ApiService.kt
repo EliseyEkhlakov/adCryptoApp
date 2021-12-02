@@ -1,11 +1,10 @@
-package com.adorly.cryptoapp.api
+package com.adorly.cryptoapp.data.network
 
-import com.adorly.cryptoapp.pojo.CoinInfoListOfData
-import com.adorly.cryptoapp.pojo.CoinPriceInfoRawData
+import com.adorly.cryptoapp.data.model.CoinInfoListOfData
+import com.adorly.cryptoapp.data.model.CoinPriceInfoRawData
 import io.reactivex.Single
 import retrofit2.http.GET
 import retrofit2.http.Query
-import java.util.*
 
 interface ApiService {
     @GET("top/totalvolfull")

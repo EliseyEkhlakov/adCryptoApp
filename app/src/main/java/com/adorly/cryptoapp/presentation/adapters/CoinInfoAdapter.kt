@@ -1,4 +1,4 @@
-package com.adorly.cryptoapp.adapters
+package com.adorly.cryptoapp.presentation.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,7 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.adorly.cryptoapp.R
-import com.adorly.cryptoapp.pojo.CoinPriceInfo
+import com.adorly.cryptoapp.data.model.CoinPriceInfo
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) :
@@ -33,7 +33,7 @@ class CoinInfoAdapter(private val context: Context) :
         with(holder) {
             with(coin) {
                 val symbolsTemplate = context.resources.getString(R.string.symbols_template)
-                tvSymbols.text = String.format(symbolsTemplate, fromsymbol, tosymbol)
+                tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                 tvPrice.text = price.toString()
                 tvLastUpdate.text = getFormattedTime()
                 Picasso.get().load(getFullImageUrl()).into(ivLogoCoin)

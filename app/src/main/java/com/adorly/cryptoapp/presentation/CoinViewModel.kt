@@ -1,13 +1,13 @@
-package com.adorly.cryptoapp
+package com.adorly.cryptoapp.presentation
 
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
-import com.adorly.cryptoapp.api.ApiFactory
-import com.adorly.cryptoapp.database.AppDatabase
-import com.adorly.cryptoapp.pojo.CoinPriceInfo
-import com.adorly.cryptoapp.pojo.CoinPriceInfoRawData
+import com.adorly.cryptoapp.data.network.ApiFactory
+import com.adorly.cryptoapp.data.database.AppDatabase
+import com.adorly.cryptoapp.data.model.CoinPriceInfo
+import com.adorly.cryptoapp.data.model.CoinPriceInfoRawData
 import com.google.gson.Gson
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers

@@ -1,4 +1,4 @@
-package com.adorly.cryptoapp.pojo
+package com.adorly.cryptoapp.data.model
 
 import com.google.gson.annotations.Expose
 

@@ -1,4 +1,4 @@
-package com.adorly.cryptoapp
+package com.adorly.cryptoapp.presentation
 
 import android.content.Context
 import android.content.Intent
@@ -7,6 +7,9 @@ import android.os.Bundle
 import android.util.Log
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.adorly.cryptoapp.R
+import com.squareup.picasso.Picasso
+import kotlinx.android.synthetic.main.activity_coin_detail.*
 
 class CoinDetailActivity : AppCompatActivity() {
 
@@ -23,6 +26,14 @@ class CoinDetailActivity : AppCompatActivity() {
         if (fromSymbol != null) {
             viewModel = ViewModelProvider(this, ViewModelProvider.AndroidViewModelFactory(application))[CoinViewModel::class.java]
             viewModel.getDetailInfo(fromSymbol).observe(this, Observer {
+                tvPrice.text = it.price
+                tvMinPrice.text = it.lowDay
+                tvMaxPrice.text = it.highDay
+                tvLastMarket.text = it.lastMarket
+                tvLastUpdate.text = it.getFormattedTime()
+                tvFromSymbol.text = it.fromSymbol
+                tvToSymbol.text = it.toSymbol
+                Picasso.get().load(it.getFullImageUrl()).into(ivLogoCoin)
                 Log.d("DETAIL_INFO", it.toString() )
             })
         }

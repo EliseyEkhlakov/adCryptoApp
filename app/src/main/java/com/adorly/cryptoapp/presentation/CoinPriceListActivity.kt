@@ -1,12 +1,13 @@
-package com.adorly.cryptoapp
+package com.adorly.cryptoapp.presentation
 
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
-import com.adorly.cryptoapp.adapters.CoinInfoAdapter
-import com.adorly.cryptoapp.pojo.CoinPriceInfo
+import com.adorly.cryptoapp.R
+import com.adorly.cryptoapp.presentation.adapters.CoinInfoAdapter
+import com.adorly.cryptoapp.data.model.CoinPriceInfo
 
 class CoinPriceListActivity : AppCompatActivity() {
 
@@ -20,7 +21,7 @@ class CoinPriceListActivity : AppCompatActivity() {
             override fun onCoinClick(coinPiceInfo: CoinPriceInfo) {
                 val intent = CoinDetailActivity.newIntent(
                     this@CoinPriceListActivity,
-                    coinPiceInfo.fromsymbol
+                    coinPiceInfo.fromSymbol
                 )
                 startActivity(intent)
             }
