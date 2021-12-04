@@ -1,4 +1,4 @@
-package com.adorly.cryptoapp.adapters
+package com.adorly.cryptoapp.presentation.adapters
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -8,13 +8,15 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.adorly.cryptoapp.R
-import com.adorly.cryptoapp.pojo.CoinPriceInfo
+import com.adorly.cryptoapp.data.network.ApiFactory
+import com.adorly.cryptoapp.domain.CoinInfo
+import com.adorly.cryptoapp.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) :
     RecyclerView.Adapter<CoinInfoAdapter.CoinInfoViewHolder>() {
 
-    var coinInfoList: List<CoinPriceInfo> = listOf()
+    var coinInfoList: List<CoinInfo> = listOf()
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -33,10 +35,10 @@ class CoinInfoAdapter(private val context: Context) :
         with(holder) {
             with(coin) {
                 val symbolsTemplate = context.resources.getString(R.string.symbols_template)
-                tvSymbols.text = String.format(symbolsTemplate, fromsymbol, tosymbol)
+                tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                 tvPrice.text = price.toString()
-                tvLastUpdate.text = getFormattedTime()
-                Picasso.get().load(getFullImageUrl()).into(ivLogoCoin)
+                tvLastUpdate.text = convertTimestampToTime(lastUpdate)
+                Picasso.get().load(ApiFactory.BASE_IMAGE_URL + imageUrl).into(ivLogoCoin)
                 itemView.setOnClickListener {
                     onCoinClickListener?.onCoinClick(this)
                 }
@@ -54,6 +56,6 @@ class CoinInfoAdapter(private val context: Context) :
     }
 
     interface OnCoinClickListener {
-        fun onCoinClick(coinPiceInfo: CoinPriceInfo)
+        fun onCoinClick(coinPiceInfo: CoinInfo)
     }
 }
