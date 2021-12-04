@@ -7,7 +7,8 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.RecyclerView
 import com.adorly.cryptoapp.R
 import com.adorly.cryptoapp.presentation.adapters.CoinInfoAdapter
-import com.adorly.cryptoapp.data.model.CoinPriceInfo
+import com.adorly.cryptoapp.data.network.model.CoinInfoDto
+import com.adorly.cryptoapp.domain.CoinInfo
 
 class CoinPriceListActivity : AppCompatActivity() {
 
@@ -18,7 +19,7 @@ class CoinPriceListActivity : AppCompatActivity() {
         setContentView(R.layout.activity_coin_price_list)
         val adapter = CoinInfoAdapter(this)
         adapter.onCoinClickListener = object : CoinInfoAdapter.OnCoinClickListener {
-            override fun onCoinClick(coinPiceInfo: CoinPriceInfo) {
+            override fun onCoinClick(coinPiceInfo: CoinInfo) {
                 val intent = CoinDetailActivity.newIntent(
                     this@CoinPriceListActivity,
                     coinPiceInfo.fromSymbol
@@ -28,13 +29,10 @@ class CoinPriceListActivity : AppCompatActivity() {
         }
         val rvCoinPriceList = findViewById<RecyclerView>(R.id.rvCoinPriceList)
         rvCoinPriceList.adapter = adapter
-        viewModel = ViewModelProvider(
-            this,
-            ViewModelProvider.AndroidViewModelFactory(application)
-        )[CoinViewModel::class.java]
-        viewModel.priceList.observe(this, Observer {
+        viewModel = ViewModelProvider(this)[CoinViewModel::class.java]
+        viewModel.coinInfoList.observe(this) {
             adapter.coinInfoList = it
-        })
+        }
     }
 
 }
