@@ -2,14 +2,11 @@ package com.adorly.cryptoapp.presentation
 
 import android.content.Context
 import android.content.Intent
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import androidx.lifecycle.Observer
+import androidx.appcompat.app.AppCompatActivity
 import androidx.lifecycle.ViewModelProvider
 import com.adorly.cryptoapp.R
-import com.adorly.cryptoapp.data.network.ApiFactory.BASE_IMAGE_URL
-import com.adorly.cryptoapp.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 import kotlinx.android.synthetic.main.activity_coin_detail.*
 
@@ -31,10 +28,10 @@ class CoinDetailActivity : AppCompatActivity() {
             tvMinPrice.text = it.lowDay
             tvMaxPrice.text = it.highDay
             tvLastMarket.text = it.lastMarket
-            tvLastUpdate.text = convertTimestampToTime(it.lastUpdate)
+            tvLastUpdate.text = it.lastUpdate
             tvFromSymbol.text = it.fromSymbol
             tvToSymbol.text = it.toSymbol
-            Picasso.get().load(BASE_IMAGE_URL + it.imageUrl).into(ivLogoCoin)
+            Picasso.get().load(it.imageUrl).into(ivLogoCoin)
             Log.d("DETAIL_INFO", it.toString())
         }
     }
