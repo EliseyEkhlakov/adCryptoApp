@@ -8,9 +8,7 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.adorly.cryptoapp.R
-import com.adorly.cryptoapp.data.network.ApiFactory
 import com.adorly.cryptoapp.domain.CoinInfo
-import com.adorly.cryptoapp.utils.convertTimestampToTime
 import com.squareup.picasso.Picasso
 
 class CoinInfoAdapter(private val context: Context) :
@@ -37,8 +35,8 @@ class CoinInfoAdapter(private val context: Context) :
                 val symbolsTemplate = context.resources.getString(R.string.symbols_template)
                 tvSymbols.text = String.format(symbolsTemplate, fromSymbol, toSymbol)
                 tvPrice.text = price.toString()
-                tvLastUpdate.text = convertTimestampToTime(lastUpdate)
-                Picasso.get().load(ApiFactory.BASE_IMAGE_URL + imageUrl).into(ivLogoCoin)
+                tvLastUpdate.text = lastUpdate
+                Picasso.get().load(imageUrl).into(ivLogoCoin)
                 itemView.setOnClickListener {
                     onCoinClickListener?.onCoinClick(this)
                 }
